@@ -1,6 +1,7 @@
 import Link from "next/link";
 import DeleteForm from "./DeleteForm";
 import { getAllTasks } from "@/utils/actions";
+import EditForm from "./EditForm";
 
 const TaskList = async () => {
   const tasks = await getAllTasks();
