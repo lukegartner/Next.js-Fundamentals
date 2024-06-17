@@ -54,12 +54,18 @@ export const createTaskCustom = async (prevState, formData) => {
   }
 };
 
-export const deleteTask = async (formData) => {
+export const deleteTask = async (prevState, formData) => {
   const id = formData.get("id");
-  await prisma.task.delete({
-    where: { id },
-  });
-  revalidatePath("/tasks");
+  try {
+    await prisma.task.delete({
+      where: { id },
+    });
+    revalidatePath("/tasks");
+    return { message: "success" };
+  } catch (error) {
+    console.log(error);
+    return { message: "error" };
+  }
 };
 
 export const editTask = async (formData) => {
